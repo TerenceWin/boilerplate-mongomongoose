@@ -120,6 +120,17 @@ const removeManyPeople = (done) => {
     }); 
 };
 
+const queryChain = (done) => {
+  const foodToSearch = "burrito";
+  Person.find({favoriteFoods: foodToSearch})
+  .sort({name: 1})
+  .limit(2)
+  .select('-age')
+  .exec((err, burritoPeople) => {
+    if (err) return done(err);
+    return done(null, burritoPeople); 
+  });
+};
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
